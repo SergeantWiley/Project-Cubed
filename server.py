@@ -3,7 +3,7 @@ import threading
 import pickle
 
 # Server setup
-HOST = '127.0.0.1'
+HOST = '192.168.0.235'
 PORT = 5555
 
 players = {}

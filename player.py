@@ -3,18 +3,23 @@ import socket
 import pickle
 
 class Player:
-    def __init__(self, x, y, width=50, height=50, color=(255, 0, 0)):
+    def __init__(self, x, y, image_path, width=300, height=300):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.color = color
         self.speed = 5
         self.server = None  # Add a socket for communication with the server
+        self.image = self.load_image(image_path)
+
+    def load_image(self, image_path):
+        """Loads and resizes the image to the specified width and height."""
+        image = pygame.image.load(image_path)
+        return pygame.transform.scale(image, (self.width, self.height))
 
     def draw(self, screen):
-        """Draws the player (square) on the screen."""
-        pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
+        """Draws the player (image) on the screen."""
+        screen.blit(self.image, (self.x, self.y))
 
     def handle_movement(self, keys):
         """Handles player movement using arrow keys."""
